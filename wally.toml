@@ -1,0 +1,7 @@
+[package]
+name = "muhdi/force_of_greed"
+version = "0.1.0"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
