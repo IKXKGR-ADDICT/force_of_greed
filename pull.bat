@@ -1,0 +1,1 @@
+lune run ./scripts/pull.luau

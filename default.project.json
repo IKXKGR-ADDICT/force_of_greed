@@ -21,8 +21,14 @@
           "$path": "src/client"
         }
       }
+    },
+    
+    "Workspace": {
+      "$path": "src/assets/workspace"
+    },
+
+    "Lighting": {
+      "$path": "src/assets/lighting"
     }
   }
 }
-
-    

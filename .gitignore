@@ -1,8 +1,11 @@
 # Project place file
 /force_of_greed.rbxlx
+build.rbxl
 
 # Roblox Studio lock files
 /*.rbxlx.lock
-/*.rbxl.lock
+*.rbxl.lock
 
 sourcemap.json
+*code-workspace
+
