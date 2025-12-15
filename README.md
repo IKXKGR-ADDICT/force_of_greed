@@ -22,7 +22,7 @@ This is a fully managed rojo project. Meaning the actual place file is not commi
 7. If your feature is done, open a PR to the main branch.
 
 ## How Asset Saving Works
-Check and understand the ``pull.luau`` script found in scripts folder in root. Your roblox studio directory consists of top level folders called services (i.e Workspace, Lighting, ServerStorage are services). Due to issues that I have no idea how to fix, you can only save assets within services, not the service itself. For the most part, this shouldn't affect you, unless you need to add a new folder underneath service.
+Check and understand the ``pullTemplate.luau`` script found in scripts folder in root. Your roblox studio directory consists of top level folders called services (i.e Workspace, Lighting, ServerStorage are services). Due to issues that I have no idea how to fix, you can only save assets within services, not the service itself. For the most part, this shouldn't affect you, unless you need to add a new folder underneath service.
 
 For example, our workspace service currently has a folder named assets, which i have already set to be pulled with the script. Preferably, any new assets (or folders containing assets) go under this folder. However, if you'd like to add a new folder (perhaps a folder named Settings) in Workspace, you'll have to do extra actions.
 
@@ -46,3 +46,26 @@ You should notice that attached to this repository (in the Github Website) is a 
 3. Work on that branch until it is done.
 4. Once your task is ready for implementation, open a pull request (PR) where other members can review your code together with you
 5. If all goes smoothly, your branch is merged to main.
+
+## Rules and Design Philosophies
+Here's a couple things to note down while you are working.
+
+1. When saving assets, only extract the assets you have modified and touched (and is the asset you want to merge into the main branch); i.e leave the files that you haven't touched unchanged. The best way to do practice this is...
+2. Always save files individually from your studio. Instead of extracting and saving a folder (such as Workspace.Assets), save the files that are inside the folder as individual .rbxm files instead. While being more tedious (see some helpful resources below), it helps as it leads to less and less merge conflicts down the road.
+3. The `pullTemplate.luau` script found in the scripts folder is only a template. Please copy over to your own pull script, and rename it to `pull.luau` (I've configured so it's already in the .gitignore). This is so you have your own script to play with (since we're not all saving the same assets)
+4. Here are some naming conventions to follow (for directories)
+
+| Type                | Naming Convention                                      |
+| ------------------- | ------------------------------------------------------ |
+| File                | [camelCase](https://en.wikipedia.org/wiki/Camel_case)  |
+| Folder              | PascalCase                                             |
+| Service (In Studio) | PascalCase                                             |
+| Service (In VSCode) | [snake_case](https://en.wikipedia.org/wiki/Snake_case) |
+|                     |                                                        |
+
+Some helpful approaches and resources to make saving and extracting less tedious
+
+1. If you're confident in scripting, you can modify your own script to make input easier.
+2. Use a macro to save and re-type common directories (like Workspace.Assets.UI.)
+3. While initially hard to remember to do, make sure to instantly add directories you've changed, removed, or added to a notepad or txt file so you can remember which assets you'll need to save and extract at the end of your work session
+

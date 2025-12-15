@@ -5,30 +5,30 @@
 
     "ReplicatedStorage": {
       "Shared": {
-        "$path": "src/shared"
+        "$path": "src/replicated_storage"
       }
     },
 
     "ServerScriptService": {
       "Server": {
-        "$path": "src/server"
+        "$path": "src/server_script_service"
       }
     },
 
     "StarterPlayer": {
       "StarterPlayerScripts": {
         "Client": {
-          "$path": "src/client"
+          "$path": "src/starter_player_scripts"
         }
       }
     },
     
     "Workspace": {
-      "$path": "src/assets/workspace"
+      "$path": "src/workspace"
     },
 
     "Lighting": {
-      "$path": "src/assets/lighting"
+      "$path": "src/lighting"
     }
   }
 }

@@ -1,11 +1,15 @@
 # Project place file
 /force_of_greed.rbxlx
 build.rbxl
+pull.luau
 
 # Roblox Studio lock files
 /*.rbxlx.lock
 *.rbxl.lock
 
+
 sourcemap.json
 *code-workspace
 
+
+scripts/pull.luau
