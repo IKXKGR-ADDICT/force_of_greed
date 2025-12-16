@@ -22,7 +22,10 @@
         }
       }
     },
-    
+    "StarterGui": {
+    "$path": "src/starter_gui" 
+  },
+
     "Workspace": {
       "$path": "src/workspace"
     },
