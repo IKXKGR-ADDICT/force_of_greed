@@ -3,19 +3,19 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "Roblox: Build", 
-            "command": "./build"
+            "label": "Roblox: Build",
+            "command": "./build",
+            "problemMatcher": []
         },
-        
         {
             "type": "shell",
             "label": "Rojo: Serve",
-            "command": "rojo serve"
+            "command": "rojo serve",
+            "problemMatcher": []
         },
-
         {
             "type": "shell",
-            "label": "Rojo: pull", 
+            "label": "Rojo: pull",
             "command": "./pull"
         }
     ]
