@@ -5,6 +5,18 @@
             "type": "shell",
             "label": "Roblox: Build", 
             "command": "./build"
+        },
+        
+        {
+            "type": "shell",
+            "label": "Rojo: Serve",
+            "command": "rojo serve"
+        },
+
+        {
+            "type": "shell",
+            "label": "Rojo: pull", 
+            "command": "./pull"
         }
     ]
 }
