@@ -4,8 +4,7 @@ local Camera = workspace.CurrentCamera
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local Character = Player.Character
-local Body = Character:WaitForChild("Humanoid")
-
+local Humanoid = Character:WaitForChild("Humanoid")
 
 local frequencyMultiplier = 5
 local xRangeMultiplier = 2
@@ -19,11 +18,14 @@ local rollDegrees = 1
 local rotFactor = 0
 local bobVector = 0
 
-Player.CameraMode = Enum.CameraMode.LockFirstPerson
+--Player.CameraMode = Enum.CameraMode.LockFirstPerson
 
 function translationCalc(time: number,frequencyMult: number, xRangeMult: number, yRangeMult: number): vector
     local x = math.cos(time * frequencyMult) / xRangeMult
     local y = math.abs(math.sin(time * frequencyMult) / yRangeMult)
+
+    print("value x   " .. tostring(x))
+    print("value y   " .. tostring(y))
 
     local total = Vector3.new(x, y, 0)
 
@@ -40,19 +42,18 @@ function rotationCalc(time: number, frequencyMult: number, rollFrequencyMult: nu
     return rollCurrent
 end
 
-RunService.RenderStepped:Connect(function()
+RunService.RenderStepped:Connect(function(delta)
     local time = tick()
 
-    if Body.MoveDirection.Magnitude > 0 then
+    if Humanoid.MoveDirection.Magnitude > 0 then
         bobVector = translationCalc(time, frequencyMultiplier, xRangeMultiplier, yRangeMultiplier)
         rotFactor = rotationCalc(time, frequencyMultiplier, rollFrequencyMultiplier, rollDegrees, smoothingFactor)
 
-        Body.CameraOffset = Body.CameraOffset:lerp(bobVector, smoothingFactor)
+        Humanoid.CameraOffset = Humanoid.CameraOffset:lerp(bobVector, smoothingFactor)
     else
-        Body.CameraOffset = Body.CameraOffset * idleDecaySmoothing
+        Humanoid.CameraOffset = Humanoid.CameraOffset * idleDecaySmoothing
         rotFactor = rotFactor * idleDecaySmoothing
     end
 
     Camera.CFrame = Camera.CFrame * CFrame.Angles(0, 0, rotFactor)
-
 end)
