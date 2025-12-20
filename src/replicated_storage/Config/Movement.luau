@@ -13,9 +13,9 @@ local config = {}
         SprintFOV = 85,
         DefaultFOV = 70,
         FOVSmoothing = 10,
-        crouchOffset = Vector3.new(0, -2, 0),
+        crouchOffset = Vector3.new(0, -1.5, 0),
         standOffset = Vector3.new(0, 0, 0),
         CrouchOffSetSmoothing = 0.25
     }
 
-return config
+return table.freeze(config)

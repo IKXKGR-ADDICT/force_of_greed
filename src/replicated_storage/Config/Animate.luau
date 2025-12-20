@@ -4,4 +4,4 @@ local config = {
     }
 }
 
-return config
+return table.freeze(config)

@@ -1,13 +1,19 @@
 local config = {}
 
     config.Settings = {
-        frequencyMult = 5,
-        xRangeMUlt = 2,
-        yRangeMult = 1.5,
-        smoothingFact = 0.5,
-        idleDecay = 0.75,
-        rollFrequencyMult = 1.5,
-        rollDegrees = 1
+        Frequency = 6,
+        XRange = 4,
+        YRange = 1.7,
+        RotateFrequency = 1.5,
+        MaxRotate = 150,
+        IdleDecay = 0.75,
+        Smoothing = 0.75
     }
 
-return config
+    config.Variables = {
+        tickMultiplier = 1,
+        upperBound = 2 * math.pi,
+        lowerBound = -(2* math.pi)
+    }
+
+return table.freeze(config)

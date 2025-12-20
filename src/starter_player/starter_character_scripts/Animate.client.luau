@@ -14,7 +14,7 @@ local current = nil
 local WeightTable = {
     walk = {condition = function(speed, magnitude) return speed == defaultWalkSpeed and magnitude > 0 end, weight = 1},
     sprint = {condition = function(speed, magnitude) return speed > defaultWalkSpeed and magnitude > 0 end, weight = 1},
-    idle = {condition = function(speed, magnitude) return speed == defaultWalkSpeed and magnitude == 0 end, weight = 1},
+    idle = {condition = function(speed, magnitude) return speed >= defaultWalkSpeed and magnitude == 0 end, weight = 1},
     crouchIdle = {condition = function(speed, magnitude) return speed < defaultWalkSpeed and magnitude == 0  end, weight = 1},
     crouchWalk = {condition = function(speed, magnitude) return speed < defaultWalkSpeed and magnitude > 0 end, weight = 1}
 }

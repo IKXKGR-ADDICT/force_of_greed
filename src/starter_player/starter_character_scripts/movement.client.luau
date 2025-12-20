@@ -7,6 +7,7 @@ local TweenService: TweenService = game:GetService("TweenService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Values = require(ReplicatedStorage.Config.Movement).Settings
 local Keybinds = require(ReplicatedStorage.Config.Movement).Keybindings
+local Global = require(ReplicatedStorage.GlobalVariables.CameraOffsets)
 
 local crouchSpeed = Values.CrouchSpeed
 local sprintSpeed = Values.SprintSpeed
@@ -25,8 +26,8 @@ local tweenInfo = TweenInfo.new(
     Enum.EasingDirection.Out
 )
 
-local crouchTween = TweenService:Create(Humanoid, tweenInfo, {CameraOffset = Values.crouchOffset})
-local standTween = TweenService:Create(Humanoid, tweenInfo, {CameraOffset = Values.standOffset})
+local crouchTween = TweenService:Create(Global.GlobalOffset, tweenInfo, {Value = Values.crouchOffset})
+local standTween = TweenService:Create(Global.GlobalOffset, tweenInfo, {Value = Values.standOffset})
 
 Humanoid.WalkSpeed = defaultSpeed
 
@@ -53,9 +54,6 @@ function doCrouch(_, inputState: Enum.UserInputState)
         standTween:Play()
     end
 end
-
-crouchTween.Completed:Connect(function() Humanoid.CameraOffset = Values.crouchOffset; print("hello") end)
-standTween.Completed:Connect(function() Humanoid.CameraOffset = Values.standOffset; end)
 
 ContextActionService:BindAction(
     "Sprint", 
