@@ -20,6 +20,8 @@ local defaultSpeed = Values.DefaultSpeed
 local FOVSmoothing = Values.FOVSmoothing
 local currentFOV = Camera.FieldOfView
 
+
+
 local tweenInfo = TweenInfo.new(
     Values.CrouchOffSetSmoothing,
     Enum.EasingStyle.Quad,
@@ -67,13 +69,15 @@ ContextActionService:BindAction(
     Keybinds.Crouch
 )
 
+Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, false)
+
 RunService.RenderStepped:Connect(function (delta) 
     if States.sprint then
         targetFOV = Values.SprintFOV
     else
         targetFOV = Values.DefaultFOV
     end
-    
+
     local FOVAlpha = 1 - math.exp(-FOVSmoothing * delta)
 
     currentFOV = currentFOV + ((targetFOV - currentFOV) * FOVAlpha)
