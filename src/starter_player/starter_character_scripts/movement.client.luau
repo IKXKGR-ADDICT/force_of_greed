@@ -82,8 +82,6 @@ RunService.RenderStepped:Connect(function (delta)
 
     currentFOV = currentFOV + ((targetFOV - currentFOV) * FOVAlpha)
 
-    print(currentFOV)
-
     Camera.FieldOfView = currentFOV
 end)
 
