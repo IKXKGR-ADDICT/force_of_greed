@@ -1,4 +1,5 @@
-local Humanoid: Humanoid = game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid")
+local Player = game:GetService("Players").LocalPlayer
+local Humanoid: Humanoid = Player.Character:WaitForChild("Humanoid")
 local Camera: Camera = game:GetService("Workspace").CurrentCamera
 local RunService: RunService = game:GetService("RunService")
 local Config = require(game:GetService("ReplicatedStorage").Config.ViewBobbing)
@@ -41,6 +42,8 @@ end
 function rotationOffset(time: number): number
     return math.sin(time * Settings.RotateFrequency) / Settings.MaxRotate
 end
+
+Player.CameraMode = Enum.CameraMode.LockFirstPerson
 
 RunService.RenderStepped:Connect(function(delta)
     local magnitude = Humanoid.MoveDirection.Magnitude
