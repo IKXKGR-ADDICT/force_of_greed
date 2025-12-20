@@ -5,7 +5,7 @@ local Animator = Humanoid:WaitForChild("Animator")
 local ReplicatedStorage: ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Config = require(ReplicatedStorage.Config.Animate).Settings
 local defaultWalkSpeed = require(ReplicatedStorage.Config.Movement).Settings.DefaultSpeed
-
+local States = require(ReplicatedStorage.GlobalVariables.AnimateStates).States
 
 local fade = Config.fade
 local defaultWeight = 1
@@ -61,6 +61,16 @@ function checkMovementMode(speed: number, magnitude: number)
     return "walk"
 end
 
+function assignStates(active: string)
+    for key, _ in States do
+        if key == active then
+            States[key] = true
+        else
+            States[key] = false
+        end
+    end
+end
+
 initializeTracks()
 
 RunService.RenderStepped:Connect(function()
@@ -70,4 +80,5 @@ RunService.RenderStepped:Connect(function()
     task.wait(0.1)
     current = checkMovementMode(speed, magnitude)
     assignAdjustWeight(current)
+    assignStates(current)
 end)

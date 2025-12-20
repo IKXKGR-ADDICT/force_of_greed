@@ -1,11 +1,10 @@
 local Humanoid: Humanoid = game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid")
 local Camera: Camera = game:GetService("Workspace").CurrentCamera
 local RunService: RunService = game:GetService("RunService")
-local Config = require(game:GetService("ReplicatedStorage").Config.Camera)
+local Config = require(game:GetService("ReplicatedStorage").Config.ViewBobbing)
 local Settings = Config.Settings
 local Var = Config.Variables
-local Global = require(game:GetService("ReplicatedStorage").GlobalVariables.CameraOffsets)
-local TweenService: TweenService = game:GetService("TweenService")
+local Global = require(game:GetService("ReplicatedStorage").GlobalVariables.CameraVariables)
 
 local finalOffset = Vector3.zero
 local translationVector = Vector3.zero
@@ -49,10 +48,7 @@ RunService.RenderStepped:Connect(function(delta)
     local rotationTime = tick()
     
     if magnitude > 0 then
-        
         translationVector = translationOffset(time)
-        
-
         finalOffset = translationVector + Global.GlobalOffset.Value
     else
         customTick = 0

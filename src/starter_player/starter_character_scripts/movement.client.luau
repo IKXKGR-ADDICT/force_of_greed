@@ -7,12 +7,12 @@ local TweenService: TweenService = game:GetService("TweenService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Values = require(ReplicatedStorage.Config.Movement).Settings
 local Keybinds = require(ReplicatedStorage.Config.Movement).Keybindings
-local Global = require(ReplicatedStorage.GlobalVariables.CameraOffsets)
+local Global = require(ReplicatedStorage.GlobalVariables.CameraVariables)
+local States = require(ReplicatedStorage.GlobalVariables.AnimateStates).States
 
 local crouchSpeed = Values.CrouchSpeed
 local sprintSpeed = Values.SprintSpeed
 local crouchFOV = Values.CrouchFOV
-local sprintFOV = Values.SprintFOV
 local defaultFOV = Values.DefaultFOV
 
 local targetFOV = defaultFOV
@@ -34,11 +34,9 @@ Humanoid.WalkSpeed = defaultSpeed
 function doSprint(_, inputState: Enum.UserInputState)
     if inputState == Enum.UserInputState.Begin then
         Humanoid.WalkSpeed = sprintSpeed
-        targetFOV = sprintFOV
 
     elseif inputState == Enum.UserInputState.End then
         Humanoid.WalkSpeed = defaultSpeed
-        targetFOV = defaultFOV
 
     end
 end
@@ -70,9 +68,18 @@ ContextActionService:BindAction(
 )
 
 RunService.RenderStepped:Connect(function (delta) 
+    if States.sprint then
+        targetFOV = Values.SprintFOV
+    else
+        targetFOV = Values.DefaultFOV
+    end
+    
     local FOVAlpha = 1 - math.exp(-FOVSmoothing * delta)
 
     currentFOV = currentFOV + ((targetFOV - currentFOV) * FOVAlpha)
+
+    print(currentFOV)
+
     Camera.FieldOfView = currentFOV
 end)
 
