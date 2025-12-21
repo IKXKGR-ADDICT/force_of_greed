@@ -1,84 +1,81 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
 local Humanoid: Humanoid = game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid")
-local RunService: RunService = game:GetService("RunService")
-local Animations = game:GetService("ReplicatedStorage").PlayerAnimations
 local Animator = Humanoid:WaitForChild("Animator")
-local ReplicatedStorage: ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Config = require(ReplicatedStorage.Config.Animate).Settings
-local defaultWalkSpeed = require(ReplicatedStorage.Config.Movement).Settings.DefaultSpeed
-local States = require(ReplicatedStorage.GlobalVariables.AnimateStates).States
+local Animations = ReplicatedStorage.PlayerAnimations
+local States = require(ReplicatedStorage.GlobalVariables.AnimationVariables).States
+local MovementConfig = require(ReplicatedStorage.Config.Movement)
+local AnimationConfig = require(ReplicatedStorage.Config.Animation)
 
-local fade = Config.fade
-local defaultWeight = 1
-
-local current = nil
-local WeightTable = {
-    walk = {condition = function(speed, magnitude) return speed == defaultWalkSpeed and magnitude > 0 end, weight = 1},
-    sprint = {condition = function(speed, magnitude) return speed > defaultWalkSpeed and magnitude > 0 end, weight = 1},
-    idle = {condition = function(speed, magnitude) return speed >= defaultWalkSpeed and magnitude == 0 end, weight = 1},
-    crouchIdle = {condition = function(speed, magnitude) return speed < defaultWalkSpeed and magnitude == 0  end, weight = 1},
-    crouchWalk = {condition = function(speed, magnitude) return speed < defaultWalkSpeed and magnitude > 0 end, weight = 1}
+local AnimationStates = {
+    walk = {
+        Track = Animator:LoadAnimation(Animations.Walk),
+        condition = function(speed: number, magnitude: number) return magnitude > 0 and speed == MovementConfig.Settings.defaultWalkSpeed end,
+        weight = 1
+    },
+    sprint = {
+        Track = Animator:LoadAnimation(Animations.Sprint),
+        condition = function(speed: number, magnitude: number) return magnitude > 0 and speed == MovementConfig.Settings.sprintWalkSpeed end,
+        weight = 1
+    },
+    crouchWalk = {
+        Track = Animator:LoadAnimation(Animations.CrouchWalk),
+        condition = function(speed: number, magnitude: number) return magnitude > 0 and speed == MovementConfig.Settings.crouchWalkSpeed end,
+        weight = 1
+    },
+    crouchIdle = {
+        Track = Animator:LoadAnimation(Animations.CrouchIdle),
+        condition = function(speed: number, magnitude: number) return magnitude == 0 and speed == MovementConfig.Settings.crouchWalkSpeed end,
+        weight = 1
+    },
+    idle = {
+        Track = Animator:LoadAnimation(Animations.Idle),
+        condition = function(speed: number, magnitude: number) return magnitude == 0 and speed == MovementConfig.Settings.defaultWalkSpeed end,
+        weight = 1
+    }
 }
 
-local Tracks = {
-    crouchIdle = Animator:LoadAnimation(Animations.CrouchIdle),
-    crouchWalk = Animator:LoadAnimation(Animations.CrouchWalk),
-    idle = Animator:LoadAnimation(Animations.Idle),
-    walk = Animator:LoadAnimation(Animations.Walk),
-    sprint = Animator:LoadAnimation(Animations.Sprint)
-}
-
-function assignAdjustWeight(string: string)
-    for key, _ in pairs(WeightTable) do
-        if key == string then
-            WeightTable[key].weight = 1
-        else
-            WeightTable[key].weight = 0
-        end
-    end
-
-    for key, _ in pairs(Tracks) do
-        Tracks[key]:AdjustWeight(WeightTable[key].weight, fade)
-    end
-end
-
-function initializeTracks()
-    for key, _ in pairs(Tracks) do
-        Tracks[key].Priority = Enum.AnimationPriority.Movement
-        Tracks[key]:Play(0, defaultWeight)
-    end
-end
-
-function checkMovementMode(speed: number, magnitude: number)
-    if not speed then speed = 0 end
-    if not magnitude then speed = 0 end
-
-    for key, _ in pairs(WeightTable) do
-        if WeightTable[key].condition(speed, magnitude) then
-            return key
-        end
-    end
-
-    return "walk"
-end
-
-function assignStates(active: string)
-    for key, _ in States do
-        if key == active then
+function setMovementMode(table, speed: number, magnitude: number)
+    for key, value in pairs(table) do
+        if value.condition(speed, magnitude) then 
+            value.weight = 1
             States[key] = true
-        else
+
+        else 
+            value.weight = 0
             States[key] = false
         end
+
+        if not value.Track.isPlaying then value.Track:Play(0, value.weight) end
+        value.Track:AdjustWeight(value.weight, AnimationConfig.Settings.smoothTime)
     end
 end
 
-initializeTracks()
+function initialize(table) 
+    for key, value in pairs(table) do
+        value.Track.Priority = Enum.AnimationPriority.Movement
+        value.Track:Play(0, value.Weight)
+    end
+end
 
-RunService.RenderStepped:Connect(function()
-    local speed = Humanoid.WalkSpeed
+function processAnimation()
+    task.wait(0.001)
+
     local magnitude = Humanoid.MoveDirection.Magnitude
-    
-    task.wait(0.1)
-    current = checkMovementMode(speed, magnitude)
-    assignAdjustWeight(current)
-    assignStates(current)
+    local speed = Humanoid.WalkSpeed
+
+    setMovementMode(AnimationStates, speed, magnitude)
+end
+
+initialize(AnimationStates)
+   
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    processAnimation()
 end)
+
+UserInputService.InputEnded:Connect(function(input, gameProcessed)
+    processAnimation()
+end)
+

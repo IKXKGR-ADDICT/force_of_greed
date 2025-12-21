@@ -69,3 +69,18 @@ Some helpful approaches and resources to make saving and extracting less tedious
 2. Use a macro to save and re-type common directories (like Workspace.Assets.UI.)
 3. While initially hard to remember to do, make sure to instantly add directories you've changed, removed, or added to a notepad or txt file so you can remember which assets you'll need to save and extract at the end of your work session
 
+## Naming and Code Conventions
+Hopefully if you've seen some of the code in the branches, then it should be fairly simplistic to understand which convention to use for different parts of your code. Below is a table for all naming conventions. It's expected that you follow this convention, as consistency can make code cleaner, and it saves you time from figuring out which name to give your variables
+
+| Type                                                    | Naming Convention |
+| ------------------------------------------------------- | ----------------- |
+| Objects/Services                                        | PascalCase        |
+| Variables                                               | camelCase         |
+| Constant Values                                         | UPPER_SNAKE_CASE |
+| Functions                                               | camelCase         |
+| Config Variables                                        | PascalCase        |
+| Global Variables                                        | camelCase         |
+| Folders (not service folders, i.e they are made by you) | PascalCase        |
+| Folders (replicas of services in roblox studio)         | lower_snake_case  |
+|                                                         |                   |
+

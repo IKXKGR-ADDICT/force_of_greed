@@ -1,21 +1,16 @@
-local config = {}
+local Config = {
+    Keybinds = {
+        sprint = Enum.KeyCode.LeftShift,
+        crouch = Enum.KeyCode.C
+    },
 
-    config.Keybindings = {
-        Sprint = Enum.KeyCode.LeftShift,
-        Crouch = Enum.KeyCode.C
+    Settings = {
+        defaultWalkSpeed = 16,
+        sprintWalkSpeed = 25,
+        crouchWalkSpeed = 10
     }
 
-    config.Settings = {
-        CrouchSpeed = 10,
-        SprintSpeed = 25,
-        DefaultSpeed = 16,
-        CrouchFOV = 55,
-        SprintFOV = 85,
-        DefaultFOV = 70,
-        FOVSmoothing = 10,
-        crouchOffset = Vector3.new(0, -1.5, 0),
-        standOffset = Vector3.new(0, 0, 0),
-        CrouchOffSetSmoothing = 0.25
-    }
 
-return table.freeze(config)
+}
+
+return Config
