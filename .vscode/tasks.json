@@ -10,13 +10,13 @@
         {
             "type": "shell",
             "label": "Rojo: Serve",
-            "command": "rojo serve",
-            "problemMatcher": []
+            "command": "rojo serve"
         },
         {
             "type": "shell",
-            "label": "Rojo: pull",
-            "command": "./pull"
+            "label": "Rojo: Pull",
+            "command": "./pull",
+            "problemMatcher": []
         }
     ]
 }

@@ -4,8 +4,8 @@
     "$className": "DataModel",
 
     "ReplicatedStorage": {
-      "$path": "src/replicated_storage"
-    },
+        "$path": "src/replicated_storage"
+      },
 
     "ServerScriptService": {
       "Server": {
@@ -26,6 +26,10 @@
       "$path": "src/starter_player/starter_player_src"
     },
 
+    "StarterPack": {
+      "$path": "src/starter_pack"
+    },
+    
     "Workspace": {
       "$path": "src/workspace"
     },
