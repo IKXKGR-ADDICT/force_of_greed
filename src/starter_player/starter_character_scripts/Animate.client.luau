@@ -65,9 +65,6 @@ function processAnimation()
     local speed = Humanoid.WalkSpeed
 
     setMovementMode(AnimationStates, speed, magnitude)
-    for key, value in pairs(States) do
-        print(key, value)
-    end
 end
 
 initialize(AnimationStates)
