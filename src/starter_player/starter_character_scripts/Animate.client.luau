@@ -1,5 +1,4 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local Humanoid: Humanoid = game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid")
 local Animator = Humanoid:WaitForChild("Animator")
@@ -12,26 +11,26 @@ local AnimationStates = {
     walk = {
         Track = Animator:LoadAnimation(Animations.Walk),
         condition = function(speed: number, magnitude: number) return magnitude > 0 and speed == MovementConfig.Settings.defaultWalkSpeed end,
-        weight = 1
+        weight = 0
     },
     sprint = {
         Track = Animator:LoadAnimation(Animations.Sprint),
         condition = function(speed: number, magnitude: number) return magnitude > 0 and speed == MovementConfig.Settings.sprintWalkSpeed end,
-        weight = 1
+        weight = 0
     },
     crouchWalk = {
         Track = Animator:LoadAnimation(Animations.CrouchWalk),
         condition = function(speed: number, magnitude: number) return magnitude > 0 and speed == MovementConfig.Settings.crouchWalkSpeed end,
-        weight = 1
+        weight = 0
     },
     crouchIdle = {
         Track = Animator:LoadAnimation(Animations.CrouchIdle),
         condition = function(speed: number, magnitude: number) return magnitude == 0 and speed == MovementConfig.Settings.crouchWalkSpeed end,
-        weight = 1
+        weight = 0
     },
     idle = {
         Track = Animator:LoadAnimation(Animations.Idle),
-        condition = function(speed: number, magnitude: number) return magnitude == 0 and speed == MovementConfig.Settings.defaultWalkSpeed end,
+        condition = function(speed: number, magnitude: number) return magnitude == 0 and speed >= MovementConfig.Settings.defaultWalkSpeed end,
         weight = 1
     }
 }
@@ -66,10 +65,12 @@ function processAnimation()
     local speed = Humanoid.WalkSpeed
 
     setMovementMode(AnimationStates, speed, magnitude)
+    for key, value in pairs(States) do
+        print(key, value)
+    end
 end
 
 initialize(AnimationStates)
-   
 
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     processAnimation()

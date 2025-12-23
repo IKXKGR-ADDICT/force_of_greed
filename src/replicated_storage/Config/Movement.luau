@@ -13,4 +13,4 @@ local Config = {
 
 }
 
-return Config
+return table.freeze(Config)

@@ -1,7 +1,7 @@
 local Config = {
     Settings = {
-        smoothTime = 0.5
+        smoothTime = 0.25
     }
 }
 
-return Config
+return table.freeze(Config)
