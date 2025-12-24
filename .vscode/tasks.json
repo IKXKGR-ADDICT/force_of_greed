@@ -3,13 +3,13 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "Roblox: Build", 
-            "command": "./build"
+            "label": "Roblox: Build",
+            "command": "./build",
+            "problemMatcher": []
         },
-
         {
             "type": "shell",
-            "label": "Roblox: Build",
+            "label": "Rojo: Serve",
             "command": "rojo serve"
         }
     ]

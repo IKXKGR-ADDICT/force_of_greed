@@ -17,11 +17,14 @@
 
     "StarterPlayer": {
       "StarterPlayerScripts": {
-        "Client": {
-          "$path": "src/starter_player_scripts"
-        }
+        "$path": "src/starter_player/starter_player_scripts"
+      },
+      
+      "StarterCharacterScripts": {
+        "$path": "src/starter_player/starter_character_scripts"
       }
     },
+
     "StarterGui": {
     "$path": "src/starter_gui" 
   },
