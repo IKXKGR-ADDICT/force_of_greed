@@ -1,3 +1,0 @@
-lighting.NIGHT
-lighting.Sky
-

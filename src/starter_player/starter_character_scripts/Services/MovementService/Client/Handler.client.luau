@@ -1,6 +1,6 @@
 local ContextActionService = game:GetService("ContextActionService")
 local Humanoid: Humanoid = game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid")
-local Config = require(game:GetService("ReplicatedStorage").Config.Movement)
+local Config = require(game:GetService("ReplicatedStorage").Services.MovementService.Shared.Config.Movement)
 
 function sprint(_, inputState: Enum.UserInputState)
     if inputState == Enum.UserInputState.Begin then
