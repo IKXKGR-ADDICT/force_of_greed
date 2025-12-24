@@ -5,6 +5,12 @@
             "type": "shell",
             "label": "Roblox: Build", 
             "command": "./build"
+        },
+
+        {
+            "type": "shell",
+            "label": "Roblox: Build",
+            "command": "rojo serve"
         }
     ]
 }
