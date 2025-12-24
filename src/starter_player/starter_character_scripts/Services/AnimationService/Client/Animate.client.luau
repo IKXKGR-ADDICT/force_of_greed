@@ -2,10 +2,10 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local UserInputService = game:GetService("UserInputService")
 local Humanoid: Humanoid = game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid")
 local Animator = Humanoid:WaitForChild("Animator")
-local Animations = ReplicatedStorage.PlayerAnimations
-local States = require(ReplicatedStorage.GlobalVariables.AnimationVariables).States
-local MovementConfig = require(ReplicatedStorage.Config.Movement)
-local AnimationConfig = require(ReplicatedStorage.Config.Animation)
+local Animations = ReplicatedStorage.Services.AnimationService.Assets.PlayerAnimations
+local States = require(ReplicatedStorage.Services.AnimationService.Shared.Data.AnimationVariables).States
+local MovementConfig = require(ReplicatedStorage.Services.MovementService.Shared.Config.Movement)
+local AnimationConfig = require(ReplicatedStorage.Services.AnimationService.Shared.Config.Animation)
 
 local AnimationStates = {
     walk = {

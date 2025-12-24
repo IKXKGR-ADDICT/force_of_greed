@@ -10,7 +10,8 @@
         {
             "type": "shell",
             "label": "Rojo: Serve",
-            "command": "rojo serve"
+            "command": "rojo serve",
+            "problemMatcher": []
         },
         {
             "type": "shell",
