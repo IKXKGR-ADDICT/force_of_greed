@@ -1,1 +1,1 @@
-lune run ./scripts/pull.luau
+lune run ./scripts/pullTemplate.luau

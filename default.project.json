@@ -3,33 +3,41 @@
   "tree": {
     "$className": "DataModel",
 
-    "ReplicatedStorage": {
-        "$path": "src/replicated_storage"
-      },
+"ReplicatedStorage": {
+  "Remotes": {
+    "$path": "src/replicated_storage/Remotes.rbxm"
+  },
+  "Services": {
+    "$path": "src/replicated_storage/Services"
+  }
+},
 
     "ServerScriptService": {
-      "Server": {
-        "$path": "src/server_script_service"
-      }
+      "$path": "src/server_script_service"
+    },
+
+    "ServerStorage": {
+      "$path": "src/server_storage"
+    },
+
+    "StarterGui": {
+      "$path": "src/starter_gui"
     },
 
     "StarterPlayer": {
-      
       "StarterCharacterScripts": {
         "$path": "src/starter_player/starter_character_scripts"
       },
-
       "StarterPlayerScripts": {
         "$path": "src/starter_player/starter_player_scripts"
       },
-
       "$path": "src/starter_player/starter_player_src"
     },
 
     "StarterPack": {
       "$path": "src/starter_pack"
     },
-    
+
     "Workspace": {
       "$path": "src/workspace"
     },
